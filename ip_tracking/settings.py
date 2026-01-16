@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ip_tracking',
+    'ratelimit',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ip_tracking.wsgi.application'
 
+# Cache configuration for rate limiting
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# Rate Limiting Configuration
+RATELIMIT_ENABLE = True
+RATELIMIT_USE_CACHE = 'default'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
